@@ -26,8 +26,26 @@ class SPA {
         } else if (templateId === "sign-up-template") {
             document.querySelector("#container form").addEventListener("submit", signUpSubmitHandler);
         } else if (templateId === "main-page-template") {
-            //document.getElementById("sign-out").addEventListener("click", signOutHandler);
+            // ✅ After loading the main page, check for reservations
+            setTimeout(() => this.loadReservations(), 500);
         }
+    }
+
+    loadReservations() {
+        const reservationTitle = document.getElementById("reservation-section-title");
+    
+        // ✅ Request reservations from the server
+        network.sendRequest("/reservations/list", "GET", {}, (response) => {
+            if (response.success && response.reservations.length > 0) {
+                // ✅ Reservations exist → Show them
+                reservationTitle.textContent = "Your Reservations";
+                this.displayReservations(response.reservations);
+            } else {
+                // ❌ No reservations → Show form
+                reservationTitle.textContent = "Make a Reservation";
+                this.showReservationForm();
+            }
+        });
     }
 }
 

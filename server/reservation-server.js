@@ -10,7 +10,7 @@ class ReservationServer {
     }
 
     createReservation(data, callback) {
-        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        const currentUser = database.getCurrentUser();
         if (!currentUser) {
             callback({ success: false, error: "User not signed in" });
             return;
@@ -18,7 +18,7 @@ class ReservationServer {
 
         let reservations = database.getReservations();
         const newReservation = {
-            id: reservations.length + 1,
+            id: database.getReservations().length + 1,
             username: currentUser.username,
             date: data.date,
             time: data.time,
@@ -30,15 +30,8 @@ class ReservationServer {
     }
 
     listReservations(callback) {
-        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-        if (!currentUser) {
-            callback({ success: false, error: "User not signed in" });
-            return;
-        }
-
-        let reservations = database.getReservations();
-        let userReservations = reservations.filter(r => r.username === currentUser.username);
-        callback({ success: true, reservations: userReservations });
+        const reservations = database.getUserReservations();
+        callback({ success: true, reservations });
     }
 }
 

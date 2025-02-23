@@ -24,6 +24,10 @@ class Database {
         localStorage.setItem("db", JSON.stringify(this.db));
     }
 
+    getCurrentUser() {
+        return JSON.parse(localStorage.getItem("currentUser")) || null;
+    }
+
     getUsers() {
         return this.db.users;
     }
@@ -32,12 +36,26 @@ class Database {
         return this.db.reservations;
     }
 
+    getUserReservations() {
+        const currentUser = this.getCurrentUser();
+        if (!currentUser) return [];
+
+        return this.db.reservations.filter(reservation => reservation.username === currentUser.username);
+    }
+
     addUser(user) {
         this.db.users.push(user);
         this.saveDB();
     }
 
     addReservation(reservation) {
+        const currentUser = this.getCurrentUser();
+        if (!currentUser) {
+            console.warn("No user is logged in. Cannot add reservation.");
+            return;
+        }
+
+        reservation.username = currentUser.username; // Ensure reservation is linked to the user
         this.db.reservations.push(reservation);
         this.saveDB();
     }

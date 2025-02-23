@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resturant</title>
+    <title>Restaurant Reservation</title>
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
@@ -18,41 +18,25 @@
     <div id="container"></div>
 
     <template id="home-page">
-        <h1>hello to you bro</h1>
+        <h1>Welcome! Please Sign In or Sign Up</h1>
     </template>
+
     <template id="main-page-template">
         <div id="main-page-div">
-            <h1>Welcome to our site! <br> You are signed in!</h1>
-            <!-- <button id="sign-out">Sign Out</button> -->
-    
-            <h2>Make a Reservation</h2>
-            <form id="reservation-form">
-                <label>Date:</label>
-                <input type="date" id="res-date" required><br>
-    
-                <label>Time:</label>
-                <input type="time" id="res-time" required><br>
-    
-                <label>Guests:</label>
-                <input type="number" id="res-guests" min="1" required><br>
-    
-                <button type="submit">Reserve</button>
-            </form>
-            
-            <h2>Your Reservations</h2>
-            <ul id="reservation-list"></ul>
+            <h1>Welcome to our site!</h1>
+            <h2 id="reservation-section-title"></h2>
+            <div id="reservation-content"></div> <!-- This will contain either the form or reservations -->
         </div>
     </template>
 
     <template id="sign-in-template">
         <div>
+            <h1>Sign In</h1>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br />
+            <input type="text" id="username" name="username" required><br>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br />
+            <input type="password" id="password" name="password" required><br>
 
             <button>Log In</button>
         </div>
@@ -60,43 +44,35 @@
 
     <template id="sign-up-template">
         <form>
-            <div>
-                <h1>Register</h1>
-                <p>Please fill in this form to create an account.</p>
-                <hr>
+            <h1>Register</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
 
-                <label for="uname"><b>Username</b></label>
-                <input type="text" name="uname" id="uname" required>
-                <br />
+            <label for="uname"><b>Username</b></label>
+            <input type="text" name="uname" id="uname" required><br>
 
-                <label for="email"><b>Email</b></label>
-                <input type="email" name="email" id="email" required>
-                <br />
+            <label for="email"><b>Email</b></label>
+            <input type="email" name="email" id="email" required><br>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" name="psw" id="psw" required>
-                <br />
+            <label for="psw"><b>Password</b></label>
+            <input type="password" name="psw" id="psw" required><br>
 
-                <label for="re-password"><b>Repeat Password</b></label>
-                <input type="password" name="re-password" id="re-password" required>
-                <br />
+            <label for="re-password"><b>Repeat Password</b></label>
+            <input type="password" name="re-password" id="re-password" required><br>
 
-                <button type="submit">Register</button>
-            </div>
+            <button type="submit">Register</button>
         </form>
     </template>
-    
+
     <script src="db.js"></script>
     <script src="./server/auth-server.js"></script>
     <script src="./server/reservation-server.js"></script>
     <script src="network.js"></script>
+    <script src="reservation.js"></script>
     <script src="./spa/sign-up.js"></script>
     <script src="./spa/sign-in.js"></script>
     <script src="./spa/sign-out.js"></script>
     <script src="app.js"></script>
-    
-    
-    
-</body>
 
+</body>
 </html>
