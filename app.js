@@ -2,7 +2,7 @@ class SPA {
     constructor() {
         this.container = document.getElementById("container");
         this.initEventListeners();
-        this.loadPage("main-page-template"); // Load home page by default
+        this.loadPage("home-page"); // Load home page by default
     }
 
     initEventListeners() {
@@ -26,7 +26,7 @@ class SPA {
         } else if (templateId === "sign-up-template") {
             document.querySelector("#container form").addEventListener("submit", signUpSubmitHandler);
         } else if (templateId === "main-page-template") {
-            document.getElementById("sign-out").addEventListener("click", signOutHandler);
+            //document.getElementById("sign-out").addEventListener("click", signOutHandler);
         }
     }
 }

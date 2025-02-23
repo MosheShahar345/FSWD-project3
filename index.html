@@ -11,16 +11,19 @@
     <h1>--SPA Basic Example--</h1>
     
     <div id="menu-bar" style="display: flex;">
-        <button id="sign-in-menu-button" onclick="signInMenuHandler()">Sign In</button>
-        <button id="sign-up-menu-button" onclick="signUpMenuHandler()">Sign Up</button>
+        <button id="sign-in-menu-button">Sign In</button>
+        <button id="sign-up-menu-button">Sign Up</button>
     </div>
 
     <div id="container"></div>
 
+    <template id="home-page">
+        <h1>hello to you bro</h1>
+    </template>
     <template id="main-page-template">
         <div id="main-page-div">
             <h1>Welcome to our site! <br> You are signed in!</h1>
-            <button id="sign-out" onclick="signOutHandler()">Sign Out</button>
+            <!-- <button id="sign-out">Sign Out</button> -->
     
             <h2>Make a Reservation</h2>
             <form id="reservation-form">
@@ -51,12 +54,12 @@
             <input type="password" id="password" name="password" required>
             <br />
 
-            <button onclick="signInButtonHandler()">Log In</button>
+            <button>Log In</button>
         </div>
     </template>
 
     <template id="sign-up-template">
-        <form onsubmit="signUpSubmitHandler(event)">
+        <form>
             <div>
                 <h1>Register</h1>
                 <p>Please fill in this form to create an account.</p>
@@ -82,11 +85,18 @@
             </div>
         </form>
     </template>
-
-    <script src="app.js"></script>
-    <script src="./spa/sign-in.js"></script>
+    
+    <script src="db.js"></script>
+    <script src="./server/auth-server.js"></script>
+    <script src="./server/reservation-server.js"></script>
+    <script src="network.js"></script>
     <script src="./spa/sign-up.js"></script>
+    <script src="./spa/sign-in.js"></script>
     <script src="./spa/sign-out.js"></script>
+    <script src="app.js"></script>
+    
+    
+    
 </body>
 
 </html>

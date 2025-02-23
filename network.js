@@ -1,3 +1,4 @@
+
 class Network {
     constructor() {
         this.delayMin = 1000; // 1 second minimum delay
@@ -30,5 +31,4 @@ class Network {
         return Math.floor(Math.random() * (this.delayMax - this.delayMin) + this.delayMin);
     }
 }
-
-const network = new Network();
+ const network = new Network();

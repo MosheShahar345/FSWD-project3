@@ -20,4 +20,5 @@ function signUpSubmitHandler(event) {
             alert(response.error);
         }
     });
+
 }
