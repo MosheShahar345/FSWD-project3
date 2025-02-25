@@ -1,11 +1,14 @@
 class AuthServer {
     handleRequest(endpoint, method, body, callback) {
-        const data = JSON.parse(body);
-
-        if (endpoint === "/auth/signin" && method === "POST") {
+        
+        if (endpoint === "/auth/signin" && method === "POST" && body) {
+            const data = JSON.parse(body);
             this.signIn(data, callback);
-        } else if (endpoint === "/auth/signup" && method === "POST") {
+        } else if (endpoint === "/auth/signup" && method === "POST" && body) {
+            const data = JSON.parse(body);
             this.signUp(data, callback);
+        } else if (endpoint === "/auth/signout" && method === "POST") {
+            this.signOut(callback);
         } else {
             callback({ success: false, error: "Invalid request" });
         }
@@ -16,7 +19,7 @@ class AuthServer {
         const user = users.find(u => u.username === data.username && u.password === data.password);
 
         if (user) {
-            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem("currentUser", JSON.stringify(user)); // TODI
             callback({ success: true, message: "Login successful" });
         } else {
             callback({ success: false, error: "Invalid credentials" });
@@ -24,7 +27,7 @@ class AuthServer {
     }
 
     signOut(callback) {
-        localStorage.removeItem("currentUser");
+        localStorage.removeItem("currentUser"); // TODI
         callback({ success: true, message: "Signed out successfully" });
     }
 
@@ -38,6 +41,7 @@ class AuthServer {
 
         database.addUser(data);
         callback({ success: true, message: "Registration successful" });
+        this.signIn(data, () => {}); // Automatically sign in after registration
     }
 }
 

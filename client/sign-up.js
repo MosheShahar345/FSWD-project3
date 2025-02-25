@@ -17,8 +17,6 @@ function signUpSubmitHandler(event) {
         if (response.success) {
             alert(response.message);
             app.loadPage("main-page-template");
-            
-            setTimeout(() => app.loadReservations(), 500);
         } else {
             alert(response.error);
         }
