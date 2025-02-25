@@ -11,16 +11,14 @@ function signUpSubmitHandler(event) {
         return;
     }
 
-    // ✅ Send request through network
-    network.sendRequest("/auth/signup", "POST", { username, email, password }, (response) => {
+    const fajax = new Fajax();
+    fajax.open("POST", "/auth/signup", true);
+    fajax.send(JSON.stringify({ username, email, password }), (response) => {
         if (response.success) {
             alert(response.message);
             app.loadPage("main-page-template");
-
-            // ✅ Check for reservations after signing up
-            setTimeout(() => {
-                checkReservations();
-            }, 500);
+            
+            setTimeout(() => app.loadReservations(), 500);
         } else {
             alert(response.error);
         }

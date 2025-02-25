@@ -1,25 +1,25 @@
 class AuthServer {
-    handleRequest(endpoint, method, data, callback) {
+    handleRequest(endpoint, method, body, callback) {
+        const data = JSON.parse(body);
+
         if (endpoint === "/auth/signin" && method === "POST") {
             this.signIn(data, callback);
-        } else if (endpoint === "/auth/signout" && method === "POST") {
-            this.signOut(callback);
         } else if (endpoint === "/auth/signup" && method === "POST") {
             this.signUp(data, callback);
         } else {
             callback({ success: false, error: "Invalid request" });
         }
     }
-
+    
     signIn(data, callback) {
         const users = database.getUsers();
         const user = users.find(u => u.username === data.username && u.password === data.password);
 
         if (user) {
-            localStorage.setItem("currentUser", JSON.stringify(user)); // Track logged-in user
+            localStorage.setItem("currentUser", JSON.stringify(user));
             callback({ success: true, message: "Login successful" });
         } else {
-            callback({ success: false, error: "Invalid username or password" });
+            callback({ success: false, error: "Invalid credentials" });
         }
     }
 
@@ -30,9 +30,9 @@ class AuthServer {
 
     signUp(data, callback) {
         let users = database.getUsers();
-
+        
         if (users.find(u => u.username === data.username)) {
-            callback({ success: false, error: "Username already taken" });
+            callback({ success: false, error: "Username taken" });
             return;
         }
 

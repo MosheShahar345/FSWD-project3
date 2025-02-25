@@ -1,10 +1,10 @@
 function checkReservations() {
-    network.sendRequest("/reservations/list", "GET", {}, (response) => {
+    const fajax = new Fajax();
+    fajax.open("GET", "/reservations/list", true);
+    fajax.send("", (response) => {
         if (response.success && response.reservations.length > 0) {
-            // ✅ Reservations exist → Show them
             displayReservations(response.reservations);
         } else {
-            // ❌ No reservations → Show form
             showReservationForm();
         }
     });
@@ -57,7 +57,7 @@ function showReservationForm() {
 }
 
 function submitReservation(event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
     const date = document.getElementById("res-date").value;
     const time = document.getElementById("res-time").value;
@@ -68,13 +68,12 @@ function submitReservation(event) {
         return;
     }
 
-    // ✅ Send reservation request
-    network.sendRequest("/reservations/create", "POST", { date, time, guests }, (response) => {
+    const fajax = new Fajax();
+    fajax.open("POST", "/reservations/create", true);
+    fajax.send(JSON.stringify({ date, time, guests }), (response) => {
         if (response.success) {
             alert(response.message);
-
-            // ✅ Refresh reservations after saving
-            checkReservations();
+            checkReservations(); // Refresh reservations
         } else {
             alert(response.error);
         }

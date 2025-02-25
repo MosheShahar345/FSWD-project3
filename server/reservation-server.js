@@ -1,5 +1,7 @@
 class ReservationServer {
-    handleRequest(endpoint, method, data, callback) {
+    handleRequest(endpoint, method, body, callback) {
+        const data = JSON.parse(body);
+
         if (endpoint === "/reservations/create" && method === "POST") {
             this.createReservation(data, callback);
         } else if (endpoint === "/reservations/list" && method === "GET") {
@@ -10,14 +12,13 @@ class ReservationServer {
     }
 
     createReservation(data, callback) {
-        const currentUser = database.getCurrentUser();
+        let currentUser = database.getCurrentUser();
         if (!currentUser) {
             callback({ success: false, error: "User not signed in" });
             return;
         }
 
-        let reservations = database.getReservations();
-        const newReservation = {
+        let newReservation = {
             id: database.getReservations().length + 1,
             username: currentUser.username,
             date: data.date,
@@ -30,7 +31,13 @@ class ReservationServer {
     }
 
     listReservations(callback) {
-        const reservations = database.getUserReservations();
+        let currentUser = database.getCurrentUser();
+        if (!currentUser) {
+            callback({ success: false, error: "User not signed in" });
+            return;
+        }
+
+        let reservations = database.getUserReservations();
         callback({ success: true, reservations });
     }
 }
