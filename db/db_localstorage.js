@@ -24,6 +24,10 @@ class Database {
         localStorage.setItem("db", JSON.stringify(this.db));
     }
 
+    setCurrentUser(user){
+        localStorage.setItem("currentUser", JSON.stringify(user));
+    }
+
     getCurrentUser() {
         return JSON.parse(localStorage.getItem("currentUser")) || null;
     }
@@ -68,6 +72,10 @@ class Database {
     updateReservations(reservations) {
         this.db.reservations = reservations;
         this.saveDB();
+    }
+
+    deleteCurrentUser(){
+        localStorage.removeItem("currentUser");
     }
 }
 

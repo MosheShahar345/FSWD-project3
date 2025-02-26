@@ -19,7 +19,7 @@ class AuthServer {
         const user = users.find(u => u.username === data.username && u.password === data.password);
 
         if (user) {
-            localStorage.setItem("currentUser", JSON.stringify(user)); // TODI
+            database.setCurrentUser(user);
             callback({ success: true, message: "Login successful" });
         } else {
             callback({ success: false, error: "Invalid credentials" });
@@ -27,7 +27,7 @@ class AuthServer {
     }
 
     signOut(callback) {
-        localStorage.removeItem("currentUser"); // TODI
+        database.deleteCurrentUser();
         callback({ success: true, message: "Signed out successfully" });
     }
 
