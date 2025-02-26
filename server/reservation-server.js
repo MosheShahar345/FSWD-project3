@@ -12,6 +12,9 @@ class ReservationServer {
         } else if (endpoint.startsWith("/reservations/delete/") && method === "DELETE") {
             const id = parseInt(endpoint.split("/").pop());
             this.deleteReservation(id, callback);
+        } else if (endpoint.startsWith("/reservations/") && method === "GET") {
+            const id = parseInt(endpoint.split("/").pop());
+            this.getReservationById(id, callback);
         } else {
             callback({ success: false, error: "Invalid request" });
         }
@@ -44,6 +47,23 @@ class ReservationServer {
 
         database.addReservation(newReservation);
         callback({ success: true, message: "Reservation created successfully" });
+    }
+
+    getReservationById(id, callback) {
+        let currentUser = database.getCurrentUser();
+        let reservation = database.getReservations().find(r => r.id === id);
+
+        if (!reservation) {
+            callback({ success: false, error: "Reservation not found" });
+            return;
+        }
+
+        if (reservation.username !== currentUser.username) {
+            callback({ success: false, error: "This reservation does not belong to the current user" });
+            return;
+        }
+
+        callback({ success: true, reservation });
     }
 
     listReservations(callback) {

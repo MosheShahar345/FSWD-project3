@@ -18,10 +18,21 @@ function displayReservations(reservations) {
     const reservationContent = document.getElementById("reservation-content");
     reservationContent.innerHTML = "";
 
+    // Add search bar above reservation list
+    const searchDiv = document.createElement("div");
+    searchDiv.innerHTML = `
+        <input type="number" id="reservation-search" placeholder="Search by Reservation Number" />
+        <button id="search-button">Search</button>
+    `;
+    reservationContent.appendChild(searchDiv);
+
+    // Listen to the search button click
+    document.getElementById("search-button").addEventListener("click", () => this.searchReservation(reservations));
+
     const list = document.createElement("ul");
     reservations.forEach(reservation => {
         const item = document.createElement("li");
-        item.textContent = `📅 Date: ${reservation.date}, 🕒 Time: ${reservation.time}, 👥 Guests: ${reservation.guests}`;
+        item.textContent = `#${reservation.id}, 📅 Date: ${reservation.date}, 🕒 Time: ${reservation.time}, 👥 Guests: ${reservation.guests}`;
 
         const updateBtn = document.createElement("button");
         updateBtn.textContent = "Update";
@@ -150,4 +161,22 @@ function submitUpdateReservation(id) {
             alert(response.error);
         }
     });
+}
+
+function searchReservation(reservations) {
+    const searchValue = document.getElementById("reservation-search").value;
+    if (!searchValue) {
+        alert("Please enter a reservation number");
+        return;
+    }
+
+    const filteredReservations = reservations.filter(r => r.id === parseInt(searchValue));
+
+    if (filteredReservations.length === 0) {
+        alert("Reservation not found");
+        return;
+    }
+
+    // Filter the displayed reservations list based on the search value
+    displayReservations(filteredReservations); // Display only the filtered reservations
 }
