@@ -14,10 +14,17 @@ class SPA {
 
     updateMenuBar() {
         const signOutButton = document.getElementById("sign-out-menu-button");
+        const signInButton = document.getElementById("sign-in-menu-button");
+        const signUpButton =  document.getElementById("sign-up-menu-button");
         if (database.getCurrentUser()) {
             signOutButton.style.display = "block";
+            signInButton.style.display = "none";
+            signUpButton.style.display = "none";
+
         } else {
             signOutButton.style.display = "none";
+            signInButton.style.display = "block";
+            signUpButton.style.display = "block";
         }
     }
 
@@ -104,6 +111,7 @@ class SPA {
     }
 
     showReservationForm() {
+        this.updateMenuBar();
         const reservationContent = document.getElementById("reservation-content");
         reservationContent.innerHTML = "";
 
@@ -122,7 +130,6 @@ class SPA {
 
             <button type="submit">Reserve</button>
         `;
-
         form.addEventListener("submit", this.submitReservation.bind(this));
         reservationContent.appendChild(form);
     }

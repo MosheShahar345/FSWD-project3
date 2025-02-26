@@ -4,6 +4,7 @@ function signOutHandler() {
     fajax.send("", (response) => {
         if (response.success) {
             alert(response.message);
+            app.updateMenuBar();
             app.loadPage("home-page");
         } else {
             alert(response.error);
