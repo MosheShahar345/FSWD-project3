@@ -1,5 +1,5 @@
 function signOutHandler() {
-    const fajax = new Fajax();
+    
     fajax.open("POST", "/auth/signout", true);
     fajax.send("", (response) => {
         if (response.success) {

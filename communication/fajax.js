@@ -1,4 +1,4 @@
-class Fajax {
+class FXMLHttpRequest {
     constructor() {
         this.data = {};
     }
@@ -24,3 +24,5 @@ class Fajax {
         }
     }
 }
+
+const fajax = new FXMLHttpRequest();

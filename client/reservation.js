@@ -1,7 +1,6 @@
 function loadReservations() {
     const reservationTitle = document.getElementById("reservation-section-title");
 
-    const fajax = new Fajax();
     fajax.open("GET", "/reservations/list", true);
     fajax.send("", (response) => {
         if (response.success && response.reservations.length > 0) {
@@ -58,7 +57,6 @@ function displayReservations(reservations) {
 }
 
 function deleteReservation(id) {
-    const fajax = new Fajax();
     fajax.open("DELETE", `/reservations/delete/${id}`, true);
     fajax.send("", (response) => {
         if (response.success) {
@@ -134,7 +132,6 @@ function submitReservation(event) {
         return;
     }
 
-    const fajax = new Fajax();
     fajax.open("POST", "/reservations/create", true);
     fajax.send(JSON.stringify({ date, time, guests }), (response) => {
         if (response.success) {
@@ -151,7 +148,6 @@ function submitUpdateReservation(id) {
     const time = document.getElementById("update-time").value;
     const guests = document.getElementById("update-guests").value;
 
-    const fajax = new Fajax();
     fajax.open("PUT", `/reservations/update/${id}`, true);
     fajax.send(JSON.stringify({ date, time, guests }), (response) => {
         if (response.success) {

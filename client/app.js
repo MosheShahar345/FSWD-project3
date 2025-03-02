@@ -1,4 +1,4 @@
-class SPA {
+class App {
     constructor() {
         this.container = document.getElementById("container");
         this.initEventListeners();
@@ -50,4 +50,4 @@ class SPA {
     }
 }
 
-const app = new SPA();
+const app = new App();

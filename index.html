@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Reservation</title>
+    <title>Kōtei (皇帝) Restaurant</title>
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
-<body>
-    <h1>--SPA Basic Example--</h1>
-    
-    <div id="menu-bar" style="display: flex;">
-        <button id="sign-in-menu-button">Sign In</button>
-        <button id="sign-up-menu-button">Sign Up</button>
-        <button id="sign-out-menu-button" style="display: none;">Sign Out</button>
+<body>    
+    <div id="menu-bar">
+        <button id="sign-in-menu-button"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+        <button id="sign-up-menu-button"><i class="fas fa-user-plus"></i> Sign Up</button>
+        <button id="sign-out-menu-button" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
     </div>
 
-    <div id="container"></div>
+    <div id="container">
+        <h1>Welcome to Neo-Tokyo Sushi</h1>
+        <h2>Your gateway to the future of fine dining.</h2>
+        <div id="reservation-content"></div>
+    </div>
 
     <template id="home-page">
         <h1>Welcome! Please Sign In or Sign Up</h1>
@@ -24,7 +28,7 @@
 
     <template id="main-page-template">
         <div id="main-page-div">
-            <h1>Welcome to our site!</h1>
+            <h1>Welcome to Kōtei (皇帝)</h1>
             <h2 id="reservation-section-title"></h2>
             <div id="reservation-content"></div> <!-- This will contain either the form or reservations -->
         </div>
@@ -39,7 +43,7 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br>
 
-            <button>Log In</button>
+            <button type="submit">Sign In</button>
         </div>
     </template>
 
@@ -49,27 +53,27 @@
             <p>Please fill in this form to create an account.</p>
             <hr>
 
-            <label for="uname"><b>Username</b></label>
+            <label for="uname"><b>Username:</b></label>
             <input type="text" name="uname" id="uname" required><br>
 
-            <label for="email"><b>Email</b></label>
+            <label for="email"><b>Email:</b></label>
             <input type="email" name="email" id="email" required><br>
 
-            <label for="psw"><b>Password</b></label>
+            <label for="psw"><b>Password:</b></label>
             <input type="password" name="psw" id="psw" required><br>
 
-            <label for="re-password"><b>Repeat Password</b></label>
+            <label for="re-password"><b>Repeat Password:</b></label>
             <input type="password" name="re-password" id="re-password" required><br>
 
-            <button type="submit">Register</button>
+            <button type="submit">Sign Up</button>
         </form>
     </template>
 
     <script src="./db/db_localstorage.js"></script>
     <script src="./server/auth-server.js"></script>
     <script src="./server/reservation-server.js"></script>
-    <script src="./fajax/network.js"></script>
-    <script src="./fajax/fajax.js"></script>
+    <script src="./communication/network.js"></script>
+    <script src="./communication/fajax.js"></script>
     <script src="./client/reservation.js"></script>
     <script src="./client/sign-up.js"></script>
     <script src="./client/sign-in.js"></script>

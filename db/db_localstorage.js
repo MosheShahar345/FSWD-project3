@@ -1,4 +1,4 @@
-class Database {
+class DB_API {
     constructor() {
         // Default database structure
         this.defaultDB = {
@@ -79,4 +79,4 @@ class Database {
     }
 }
 
-const database = new Database();
+const database = new DB_API();
