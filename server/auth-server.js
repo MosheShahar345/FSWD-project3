@@ -1,4 +1,11 @@
+/**
+ * AuthServer class that handles authentication requests from the client using the provided database api.
+ */
 class AuthServer {
+
+    /**
+     * handleRequest method that handles the request based on the endpoint, method, body and callback.
+     */
     handleRequest(endpoint, method, body, callback) {
         
         if (endpoint === "/auth/signin" && method === "POST" && body) {

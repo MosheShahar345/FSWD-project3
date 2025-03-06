@@ -73,6 +73,9 @@ function showReservationForm() {
     const reservationContent = document.getElementById("reservation-content");
     reservationContent.innerHTML = "";
 
+    const reservationTitle = document.getElementById("reservation-section-title");
+    reservationTitle.textContent = "Make a Reservation";
+
     const form = document.createElement("form");
     form.id = "reservation-form";
 

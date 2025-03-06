@@ -14,7 +14,6 @@ class FXMLHttpRequest {
     }
 
     send(body = "", func = () => { }) {
-        const net = new Network();
         const request = { ...this.data, body };
 
         if (this.data.isAsync) {

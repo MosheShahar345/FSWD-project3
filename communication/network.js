@@ -41,3 +41,5 @@ class Network {
         return Math.floor(Math.random() * (this.delayMax - this.delayMin) + this.delayMin);
     }
 }
+
+const net = new Network();
