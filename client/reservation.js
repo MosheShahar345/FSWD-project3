@@ -6,9 +6,10 @@ function loadReservations() {
         if (response.success && response.reservations.length > 0) {
             reservationTitle.textContent = "Your Reservations";
             displayReservations(response.reservations);
+            document.getElementById("return-button").style.display = "none";
         } else {
             reservationTitle.textContent = "Make a Reservation";
-            showReservationForm();
+            showReservationForm(!response.reservations || response.reservations.length === 0);
         }
     });
 }
@@ -68,8 +69,13 @@ function deleteReservation(id) {
     });
 }
 
-function showReservationForm() {
+function showReservationForm(isFirstOrder) {
     app.updateMenuBar();
+
+    if (!isFirstOrder) {
+        returnButtonToMenu();
+    }
+    
     const reservationContent = document.getElementById("reservation-content");
     reservationContent.innerHTML = "";
 
@@ -96,6 +102,8 @@ function showReservationForm() {
 }
 
 function showUpdateForm(reservation) {
+    returnButtonToMenu();
+
     const reservationContent = document.getElementById("reservation-content");
     reservationContent.innerHTML = "";
 
@@ -178,4 +186,10 @@ function searchReservation(reservations) {
 
     // Filter the displayed reservations list based on the search value
     displayReservations(filteredReservations); // Display only the filtered reservations
+}
+
+function returnButtonToMenu() {
+    const returnButton = document.getElementById("return-button");
+    returnButton.style.display = "block";
+    returnButton.addEventListener("click", () => loadReservations());
 }

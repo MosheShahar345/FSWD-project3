@@ -16,16 +16,17 @@ class App {
         const signOutButton = document.getElementById("sign-out-menu-button");
         const signInButton = document.getElementById("sign-in-menu-button");
         const signUpButton =  document.getElementById("sign-up-menu-button");
+        const returnButton = document.getElementById("return-button");
         if (database.getCurrentUser()) {
             signOutButton.style.display = "block";
             signInButton.style.display = "none";
             signUpButton.style.display = "none";
-
         } else {
             signOutButton.style.display = "none";
             signInButton.style.display = "block";
             signUpButton.style.display = "block";
         }
+        returnButton.style.display = "none";
     }
 
     loadPage(templateId) {
