@@ -1,4 +1,5 @@
 class ReservationServer {
+    
     handleRequest(endpoint, method, body, callback) {
         
         if (endpoint === "/reservations/create" && method === "POST" && body) {
@@ -37,8 +38,10 @@ class ReservationServer {
             return;
         }
 
+        let maxId = reservations.length > 0 ? Math.max(...reservations.map(r => r.id)) + 1: 1;
+
         let newReservation = {
-            id: database.getReservations().length + 1,
+            id: maxId,
             username: currentUser.username,
             date: data.date,
             time: data.time,

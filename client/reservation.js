@@ -18,16 +18,14 @@ function displayReservations(reservations) {
     const reservationContent = document.getElementById("reservation-content");
     reservationContent.innerHTML = "";
 
-    // Add search bar above reservation list
     const searchDiv = document.createElement("div");
+    searchDiv.id = "search-container";
     searchDiv.innerHTML = `
         <input type="number" id="reservation-search" placeholder="Search by Reservation Number" />
         <button id="search-button">Search</button>
     `;
     reservationContent.appendChild(searchDiv);
-
-    // Listen to the search button click
-    document.getElementById("search-button").addEventListener("click", () => this.searchReservation(reservations));
+    document.getElementById("search-button").addEventListener("click", () => searchReservation(reservations));
 
     const list = document.createElement("ul");
     reservations.forEach(reservation => {
@@ -183,9 +181,16 @@ function searchReservation(reservations) {
         alert("Reservation not found");
         return;
     }
-
+    
     // Filter the displayed reservations list based on the search value
-    displayReservations(filteredReservations); // Display only the filtered reservations
+    displayReservations(filteredReservations);
+    
+    const reservationContent = document.getElementById("reservation-content");
+    const searchContainer = document.getElementById("search-container");
+    
+    searchContainer.innerHTML = `<button id="reset-button">See All Reservations</button>`;
+    document.getElementById("reset-button").addEventListener("click", () => displayReservations(reservations));
+    reservationContent.appendChild(searchDiv);
 }
 
 function returnButtonToMenu() {
