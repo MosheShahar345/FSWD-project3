@@ -1,3 +1,3 @@
 # FSWD-project3
 # ואבטחת המידע
-# לפעמים כשמעדכנים או מוסיפים הזמנה ההזמנה החדשה מקבלת אינדקס של הזמנה קיימת זה גורר גם מחיקה כפולה של הזמנות
+# loosing packages on return from server to client
