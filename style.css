@@ -1,5 +1,5 @@
 body {
-    font-family: 'Noto Serif JP', serif;
+    font-family: 'Noto Serif', 'Noto Serif JP', serif;
     background-color: #111;
     color: #fff;
     margin: 0;
@@ -78,10 +78,19 @@ body {
     transform: scale(1.05); 
 }
 
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(45deg, gold, #e63946);
+}
+
 h1, h2 {
-    font-family: 'Noto Serif JP', serif;
     color: gold;
     text-shadow: 2px 2px 5px rgba(255, 223, 0, 0.5);
+}
+
+.fix-o {
+    font-family: 'Noto Serif', serif;
 }
 
 input, button {
