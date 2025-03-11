@@ -1,3 +1,3 @@
 # FSWD-project3
-# ואבטחת המידע
-# loosing packages on return from server to client
+# Why using setTimeoput in app
+# fajax should be initialized every time the client needs
