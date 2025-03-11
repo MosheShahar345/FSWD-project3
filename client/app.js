@@ -1,3 +1,4 @@
+// Purpose: Main entry point for the client-side application
 class App {
     constructor() {
         this.container = document.getElementById("container");
@@ -6,12 +7,14 @@ class App {
         this.updateMenuBar();
     }
 
+    // Initialize event listeners for the menu bar
     initEventListeners() {
         document.getElementById("sign-in-menu-button").addEventListener("click", () => this.loadPage("sign-in-template"));
         document.getElementById("sign-up-menu-button").addEventListener("click", () => this.loadPage("sign-up-template"));
         document.getElementById("sign-out-menu-button").addEventListener("click", signOutHandler);
     }
 
+    // Update the menu bar based on the current user
     updateMenuBar() {
         const signOutButton = document.getElementById("sign-out-menu-button");
         const signInButton = document.getElementById("sign-in-menu-button");
@@ -29,6 +32,7 @@ class App {
         returnButton.style.display = "none";
     }
 
+    // Load a page based on the template id
     loadPage(templateId) {
         const template = document.getElementById(templateId);
         if (template) {
@@ -40,6 +44,7 @@ class App {
         }
     }
 
+    // Initialize dynamic event listeners according to the template id
     initDynamicEventListeners(templateId) {
         if (templateId === "sign-in-template") {
             document.querySelector("#container button").addEventListener("click", signInButtonHandler);

@@ -1,5 +1,7 @@
+// ReservationServer class that handles reservation requests from the client using the provided database api.
 class ReservationServer {
     
+    // handleRequest method that handles the request based on the endpoint, method, body and callback.
     handleRequest(endpoint, method, body, callback) {
         
         if (endpoint === "/reservations/create" && method === "POST" && body) {
@@ -21,6 +23,7 @@ class ReservationServer {
         }
     }
 
+    // createReservation method that creates a new reservation based on the provided data.
     createReservation(data, callback) {
         let currentUser = database.getCurrentUser();
         if (!currentUser) {
@@ -52,6 +55,7 @@ class ReservationServer {
         callback({ success: true, message: "Reservation created successfully" });
     }
 
+    // getReservationById method that retrieves a reservation based on the provided id.
     getReservationById(id, callback) {
         let currentUser = database.getCurrentUser();
         let reservation = database.getReservations().find(r => r.id === id);
@@ -69,6 +73,7 @@ class ReservationServer {
         callback({ success: true, reservation });
     }
 
+    // listReservations method that retrieves all reservations for the current user.
     listReservations(callback) {
         let currentUser = database.getCurrentUser();
         if (!currentUser) {
@@ -80,6 +85,7 @@ class ReservationServer {
         callback({ success: true, reservations });
     }
 
+    // updateReservation method that updates an existing reservation based on the provided id and data.
     updateReservation(id, newData, callback) {
         let reservations = database.getReservations();
         let reservationIndex = reservations.findIndex(r => r.id === id);
@@ -104,6 +110,7 @@ class ReservationServer {
         callback({ success: true, message: "Reservation updated successfully" });
     }
 
+    // deleteReservation method that deletes a reservation based on the provided id.
     deleteReservation(id, callback) {
         let reservations = database.getReservations();
         const updatedReservations = reservations.filter(r => r.id !== id);

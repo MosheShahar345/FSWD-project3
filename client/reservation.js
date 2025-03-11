@@ -1,3 +1,4 @@
+// Load the reservations page and handle reservation creation, updating, and deletion
 function loadReservations() {
     const reservationTitle = document.getElementById("reservation-section-title");
 
@@ -14,10 +15,13 @@ function loadReservations() {
     });
 }
 
+// Display the reservations list and handle reservation creation, updating, and deletion
 function displayReservations(reservations) {
+    
     const reservationContent = document.getElementById("reservation-content");
     reservationContent.innerHTML = "";
 
+    // Display the search bar
     const searchDiv = document.createElement("div");
     searchDiv.id = "search-container";
     searchDiv.innerHTML = `
@@ -27,6 +31,7 @@ function displayReservations(reservations) {
     reservationContent.appendChild(searchDiv);
     document.getElementById("search-button").addEventListener("click", () => searchReservation(reservations));
 
+    // Display the reservations list
     const list = document.createElement("ul");
     reservations.forEach(reservation => {
         const item = document.createElement("li");
@@ -49,12 +54,14 @@ function displayReservations(reservations) {
 
     reservationContent.appendChild(list);
 
+    // Display the add reservation button
     const addBtn = document.createElement("button");
     addBtn.textContent = "Add Reservation";
     addBtn.addEventListener("click", () => showReservationForm());
     reservationContent.appendChild(addBtn);
 }
 
+// Delete a reservation based on the reservation id
 function deleteReservation(id) {
     fajax.open("DELETE", `/reservations/delete/${id}`, true);
     fajax.send("", (response) => {
@@ -67,6 +74,7 @@ function deleteReservation(id) {
     });
 }
 
+// Show the reservation form for creating a new reservation
 function showReservationForm(isFirstOrder) {
     app.updateMenuBar();
 
@@ -99,6 +107,7 @@ function showReservationForm(isFirstOrder) {
     reservationContent.appendChild(form);
 }
 
+// Show the reservation form for updating an existing reservation
 function showUpdateForm(reservation) {
     returnButtonToMenu();
 
@@ -129,6 +138,7 @@ function showUpdateForm(reservation) {
     reservationContent.appendChild(form);
 }
 
+// Submit a new reservation to the server
 function submitReservation(event) {
     event.preventDefault(); 
 
@@ -152,6 +162,7 @@ function submitReservation(event) {
     });
 }
 
+// Submit an updated reservation to the server
 function submitUpdateReservation(id) {
     const date = document.getElementById("update-date").value;
     const time = document.getElementById("update-time").value;
@@ -168,6 +179,7 @@ function submitUpdateReservation(id) {
     });
 }
 
+// Search for a reservation based on the reservation number
 function searchReservation(reservations) {
     const searchValue = document.getElementById("reservation-search").value;
     if (!searchValue) {
@@ -193,6 +205,7 @@ function searchReservation(reservations) {
     reservationContent.appendChild(searchDiv);
 }
 
+// A return button helper for returning to the reservations menu
 function returnButtonToMenu() {
     const returnButton = document.getElementById("return-button");
     returnButton.style.display = "block";

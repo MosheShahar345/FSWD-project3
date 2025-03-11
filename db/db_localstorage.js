@@ -1,3 +1,4 @@
+// DB API for local storage database
 class DB_API {
     constructor() {
         // Default database structure
@@ -10,6 +11,7 @@ class DB_API {
         this.loadDB();
     }
 
+    // Load database from local storage
     loadDB() {
         const storedDB = localStorage.getItem("db");
         if (!storedDB) {
@@ -20,26 +22,32 @@ class DB_API {
         }
     }
 
+    // Save database to local storage
     saveDB() {
         localStorage.setItem("db", JSON.stringify(this.db));
     }
 
+    // Set the current user in local storage
     setCurrentUser(user){
         localStorage.setItem("currentUser", JSON.stringify(user));
     }
 
+    // Get the current user from local storage
     getCurrentUser() {
         return JSON.parse(localStorage.getItem("currentUser")) || null;
     }
 
+    // Get all users from the database
     getUsers() {
         return this.db.users;
     }
 
+    // Get all reservations from the database
     getReservations() {
         return this.db.reservations;
     }
 
+    // Get reservations for the current user
     getUserReservations() {
         const currentUser = this.getCurrentUser();
         if (!currentUser) return [];
@@ -47,11 +55,13 @@ class DB_API {
         return this.db.reservations.filter(reservation => reservation.username === currentUser.username);
     }
 
+    // Add a user to the database
     addUser(user) {
         this.db.users.push(user);
         this.saveDB();
     }
 
+    // Add a reservation to the database
     addReservation(reservation) {
         const currentUser = this.getCurrentUser();
         if (!currentUser) {
@@ -64,16 +74,19 @@ class DB_API {
         this.saveDB();
     }
 
+    // Update a reservation in the database
     updateUsers(users) {
         this.db.users = users;
         this.saveDB();
     }
 
+    // Update a reservation in the database
     updateReservations(reservations) {
         this.db.reservations = reservations;
         this.saveDB();
     }
 
+    // Delete the current user from local storage
     deleteCurrentUser(){
         localStorage.removeItem("currentUser");
     }
