@@ -1,7 +1,7 @@
 class Network {
     constructor() {
         this.delayMin = 1000; // 1 second minimum delay
-        this.delayMax = 3000; // 3 seconds maximum delay
+        this.delayMax = 1500; // 3 seconds maximum delay
         this.dropRate = 0.1; // 10% chance of request failure
     }
 
@@ -24,7 +24,7 @@ class Network {
 
         setTimeout(() => {
             if (Math.random() < this.dropRate) {
-                console.warn(`Network: Request to ${request.url} failed (simulated loss)`);
+                alert(`Network: Request to ${request.url} failed (simulated loss)`);
                 callback({ success: false, error: "Network error. Try again." });
                 return;
             }
@@ -51,7 +51,7 @@ class Network {
     simulateNetworkResponse(url, response, callback) {
         setTimeout(() => {
             if (Math.random() < this.dropRate) {
-                console.warn(`Network: Response lost for ${url}`);
+                alert(`Network: Response lost for ${url}`);
                 callback({ success: false, error: "Network error. Try again." });
             } else {
                 callback(response);

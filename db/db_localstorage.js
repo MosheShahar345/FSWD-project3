@@ -39,11 +39,13 @@ class DB_API {
 
     // Get all users from the database
     getUsers() {
+        this.loadDB();
         return this.db.users;
     }
 
     // Get all reservations from the database
     getReservations() {
+        this.loadDB();
         return this.db.reservations;
     }
 
@@ -52,11 +54,13 @@ class DB_API {
         const currentUser = this.getCurrentUser();
         if (!currentUser) return [];
 
+        this.loadDB();
         return this.db.reservations.filter(reservation => reservation.username === currentUser.username);
     }
 
     // Add a user to the database
     addUser(user) {
+        this.loadDB();
         this.db.users.push(user);
         this.saveDB();
     }
@@ -69,6 +73,7 @@ class DB_API {
             return;
         }
 
+        this.loadDB();
         reservation.username = currentUser.username; // Ensure reservation is linked to the user
         this.db.reservations.push(reservation);
         this.saveDB();
@@ -76,18 +81,20 @@ class DB_API {
 
     // Update a reservation in the database
     updateUsers(users) {
+        this.loadDB();
         this.db.users = users;
         this.saveDB();
     }
 
     // Update a reservation in the database
     updateReservations(reservations) {
+        this.loadDB();
         this.db.reservations = reservations;
         this.saveDB();
     }
 
     // Delete the current user from local storage
-    deleteCurrentUser(){
+    deleteCurrentUser() {
         localStorage.removeItem("currentUser");
     }
 }

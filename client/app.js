@@ -51,7 +51,7 @@ class App {
         } else if (templateId === "sign-up-template") {
             document.querySelector("#container form").addEventListener("submit", signUpSubmitHandler);
         } else if (templateId === "main-page-template") {
-            setTimeout(() => loadReservations(), 500);
+            loadReservations();        
         }
     }
 }

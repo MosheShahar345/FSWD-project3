@@ -2,6 +2,7 @@
 function loadReservations() {
     const reservationTitle = document.getElementById("reservation-section-title");
 
+    const fajax = new FXMLHttpRequest();
     fajax.open("GET", "/reservations/list", true);
     fajax.send("", (response) => {
         if (response.success && response.reservations.length > 0) {
@@ -57,12 +58,13 @@ function displayReservations(reservations) {
     // Display the add reservation button
     const addBtn = document.createElement("button");
     addBtn.textContent = "Add Reservation";
-    addBtn.addEventListener("click", () => showReservationForm());
+    addBtn.addEventListener("click", () => showReservationForm(true));
     reservationContent.appendChild(addBtn);
 }
 
 // Delete a reservation based on the reservation id
 function deleteReservation(id) {
+    const fajax = new FXMLHttpRequest();
     fajax.open("DELETE", `/reservations/delete/${id}`, true);
     fajax.send("", (response) => {
         if (response.success) {
@@ -151,6 +153,7 @@ function submitReservation(event) {
         return;
     }
 
+    const fajax = new FXMLHttpRequest();
     fajax.open("POST", "/reservations/create", true);
     fajax.send(JSON.stringify({ date, time, guests }), (response) => {
         if (response.success) {
@@ -168,6 +171,7 @@ function submitUpdateReservation(id) {
     const time = document.getElementById("update-time").value;
     const guests = document.getElementById("update-guests").value;
 
+    const fajax = new FXMLHttpRequest();
     fajax.open("PUT", `/reservations/update/${id}`, true);
     fajax.send(JSON.stringify({ date, time, guests }), (response) => {
         if (response.success) {
@@ -202,7 +206,6 @@ function searchReservation(reservations) {
     
     searchContainer.innerHTML = `<button id="reset-button">See All Reservations</button>`;
     document.getElementById("reset-button").addEventListener("click", () => displayReservations(reservations));
-    reservationContent.appendChild(searchDiv);
 }
 
 // A return button helper for returning to the reservations menu

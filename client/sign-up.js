@@ -11,6 +11,7 @@ function signUpSubmitHandler(event) {
         return;
     }
 
+    const fajax = new FXMLHttpRequest();
     fajax.open("POST", "/auth/signup", true);
     fajax.send(JSON.stringify({ username, email, password }), (response) => {
         if (response.success) {
